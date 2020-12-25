@@ -144,7 +144,7 @@ SDP.prototype.toJingle = function(elem, thecreator, localEndpointId) {
         let ssrc;
         const assrcline = SDPUtil.findLine(this.media[i], 'a=ssrc:');
 
-        if (assrcline) {
+        if (assrcline !== false) {
             ssrc = assrcline.substring(7).split(' ')[0]; // take the first
         } else {
             ssrc = false;
