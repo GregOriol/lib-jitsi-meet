@@ -383,6 +383,17 @@ export default class JingleConnectionPlugin extends ConnectionPlugin {
 
         let filter;
 
+        // Allows the removal of tls "turns" servers on Safari because it has a bug
+        // and can't connect when the certificate is from Let's Encrypt (and maybe other CAs)
+        // see: https://b.webkit.org/show_bug.cgi?id=219274
+        if (options.noTurnsOnSafari) {
+            const isSafari = navigator.userAgent.match(/\/([0-9]+).?[0-9]* Safari\//);
+            if (isSafari/* && parseInt(match[1], 10) < 15*/) { // TODO: add version check when the resolved bug is shipped
+                filter = s => (s.urls.indexOf('turns:') === -1);
+                iceservers = iceservers.filter(filter);
+            }
+        }
+
         if (options.useTurnUdp) {
             filter = s => s.urls.startsWith('turn');
         } else {
