@@ -71,5 +71,7 @@
   },
   "main": "./index.js",
   "license": "Apache-2.0",
-  "files": ["lib-jitsi-meet.*"]
+  "files": [
+    "lib-jitsi-meet.*"
+  ]
 }
