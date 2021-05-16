@@ -331,7 +331,7 @@ export default class JingleConnectionPlugin extends ConnectionPlugin {
      * @return {boolean} Whether something was processed from the supplied message.
      */
     onReceiveStunAndTurnCredentials(res) {
-        const iceservers = [];
+        let iceservers = [];
 
         $(res).find('>services>service').each((idx, el) => {
             // eslint-disable-next-line no-param-reassign
